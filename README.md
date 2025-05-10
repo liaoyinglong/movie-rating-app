@@ -1,5 +1,7 @@
 # Movie Rating
 
+> 在线预览：https://movie-rating-app-bice.vercel.app
+
 ## 功能描述
 
 - 登录
