@@ -1,0 +1,28 @@
+import { Button, EmptyState, VStack } from '@chakra-ui/react';
+import Link from 'next/link';
+import { LuSearch } from 'react-icons/lu';
+
+export default function NotFound() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center px-4">
+      <EmptyState.Root className="w-full max-w-md">
+        <EmptyState.Content>
+          <EmptyState.Indicator>
+            <LuSearch className="text-5xl text-gray-400 dark:text-gray-500" />
+          </EmptyState.Indicator>
+          <VStack textAlign="center">
+            <EmptyState.Title className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              404 - 页面未找到
+            </EmptyState.Title>
+            <EmptyState.Description className="text-gray-600 dark:text-gray-400">
+              抱歉，您访问的页面不存在或已被删除。
+            </EmptyState.Description>
+            <Button className="mt-4 w-full" asChild>
+              <Link href="/">返回首页</Link>
+            </Button>
+          </VStack>
+        </EmptyState.Content>
+      </EmptyState.Root>
+    </div>
+  );
+}
