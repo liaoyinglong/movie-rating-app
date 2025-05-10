@@ -1,39 +1,37 @@
-### Movie Rating
+### Movie Rating App
 
 > Live preview: [https://movie-rating-app-bice.vercel.app](https://movie-rating-app-bice.vercel.app)
 
-## Features
+## Feature Overview
 
-- Login
-- Logout
-- Home page
-- Movie details
-- Movie ratings
-- Movie reviews
+- User authentication (login/logout)
+- Movie browsing and detail display
+- Movie rating system
+- User review functionality
 - Movie search
-- Light/Dark theme
+- Dark/Light theme switching
 - Responsive design
 
-## Project Structure
+## Project Architecture
 
-```shellscript
+```plaintext
 movie-rating/
 ├── config/                # Configuration files
 │   └── data/              # Initialization data
 ├── src/
-│   ├── app/               # Next.js app router
+│   ├── app/               # Next.js App Router structure
 │   │   ├── page.tsx       # Home page
 │   │   ├── layout.tsx     # Root layout
 │   │   ├── globals.css    # Global styles
 │   │   └── movie/         # Movie-related routes
-│   │       └── [id]/      # Movie detail page, dynamic route
-│   ├── components/        # React components
+│   │       └── [id]/      # Movie detail page (dynamic route)
+│   ├── components/        # Reusable components
 │   │   ├── header/        # Page header components
-│   │   ├── ui/            # Chakra UI generated code
+│   │   ├── ui/            # Chakra UI components
 │   │   └── login-dialog/  # Login dialog component
 │   ├── constants/         # Constant definitions
-│   ├── database/          # Database related
-│   ├── server-actions/    # Server actions, including login, logout, etc.
+│   ├── database/          # Database interaction layer
+│   ├── server-actions/    # Next.js Server Actions
 │   └── utils/             # Utility functions
 ├── next.config.ts         # Next.js configuration
 ├── package.json           # Project dependencies
@@ -42,58 +40,53 @@ movie-rating/
 
 ## Tech Stack
 
-### Core
+### Core Framework
 
-- `next.js 15`
-- `react 19`
+- **Next.js 15**
+- **React 19**
 
-### Styling
+### UI & Styling
 
-- `chakra ui 3`
-- `tailwindcss 4`
-
-### State Management
-
-Not currently used, as the current functionality is simple enough that we don't need to share many states
+- **Chakra UI 3**
+- **Tailwind CSS 4**
 
 ### Backend Interaction
 
-Currently using Next.js `server actions` for backend interaction
+- **Server Actions** - Using Next.js Server Actions for server-side interactions
 
 ### Data Validation
 
-Using `zod` for data validation
+- **Zod**
 
-### Testing
+### Testing Tools
 
-We've chosen `vitest` which is more powerful than `jest` for unit testing
+- **Vitest** - High-performance testing framework, faster than Jest
+- **Happy DOM** - DOM environment for testing
+- **Testing Library** - User interaction testing tools
 
-- `vitest`
-- `happy-dom`
 - `@testing-library/dom`
 - `@testing-library/react`
 - `@testing-library/user-event`
 
-### Database
+### Data Storage
 
-Currently using `redis` to simulate a database, connected via `ioredis`
+- **Redis** - Used to simulate a database
+- **IORedis** - Redis client
 
-### Others
+### Development Tools
 
-- `husky` - Git hooks
-- `prettier` - Code formatting
-- `eslint` - Code linting
-- `lint-staged` - Pre-commit checks
+- **Husky** - Git hooks management
+- **Prettier** - Code formatting
+- **ESLint** - Code quality checking
+- **lint-staged** - Run linters against staged files
 
-## Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
+### Requirements
 
-You need to install:
-
-- `node@22` (see `.nvmrc`)
-- `pnpm@9` (see `package.json#packageManager`)
-- `redis`, or use `docker`: run `docker run --name movie-rating-redis -p 6379:6379 -d redis`
+- **Node.js v22** (see `.nvmrc`)
+- **pnpm v9** (see `package.json#packageManager`)
+- **Redis** service (can be run through Docker)
 
 ### Install Dependencies
 
@@ -101,27 +94,27 @@ You need to install:
 pnpm install
 ```
 
-### Initialize Data
+### Data Initialization
 
-#### Local Redis
+#### Option 1: Local Redis (recommended for development)
 
-Use `docker` to start a `redis` service
+Start Redis service using Docker:
 
 ```shellscript
 docker run --name movie-rating-redis -p 6379:6379 -d redis
 ```
 
+Initialize data:
+
 ```shellscript
 pnpm run init:data
 ```
 
-#### Cloud Redis
+#### Option 2: Cloud Redis
 
-To use a cloud-based Redis instance:
+Add Redis connection URL in the `.env.local` file:
 
-Add the environment variable to `.env.local`:
-
-```env
+```plaintext
 REDIS_URL=redis://...
 ```
 
@@ -131,20 +124,20 @@ Then run:
 pnpm run init:data
 ```
 
-### Start the Project
+### Start Development Server
 
 ```shellscript
 pnpm run dev
 ```
 
-After starting, visit [http://localhost:3000](http://localhost:3000) to access the home page
+Visit [http://localhost:3000](http://localhost:3000) to view the application
 
-## Running Tests
+## Testing
 
-Currently, unit test files are in the same folder as the code files, distinguished by suffix:
+The project uses Vitest for unit testing, with test files located in the same directory as the source code:
 
-- `*.ts` for code files
-- `*.spec.ts` for test files
+- `*.ts` - Source code files
+- `*.spec.ts` - Test files
 
 Run tests:
 
@@ -154,7 +147,7 @@ pnpm run test
 
 ### Current Test Coverage
 
-```shellscript
+```plaintext
 --------------------------------|---------|----------|---------|---------|-------------------
 File                            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 --------------------------------|---------|----------|---------|---------|-------------------
@@ -193,6 +186,12 @@ All files                       |   80.48 |    87.05 |   89.28 |   80.48 |
 --------------------------------|---------|----------|---------|---------|-------------------
 ```
 
-## Submitting Code
+## Development Standards
 
-A `pre-commit` hook is configured to format code, check TypeScript types, and run Vitest unit tests when committing code. If any checks fail, the commit will be blocked.
+The project has configured pre-commit checks to ensure code quality:
+
+- Code formatting (Prettier)
+- TypeScript type checking
+- Unit testing (Vitest)
+
+If any checks fail, the commit will be blocked.
