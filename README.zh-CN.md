@@ -1,72 +1,72 @@
-### Movie Rating
+# Movie Rating
 
-> Live preview: [https://movie-rating-app-bice.vercel.app](https://movie-rating-app-bice.vercel.app)
+> 在线预览：https://movie-rating-app-bice.vercel.app
 
-## Features
+## 功能描述
 
-- Login
-- Logout
-- Home page
-- Movie details
-- Movie ratings
-- Movie reviews
-- Movie search
-- Light/Dark theme
-- Responsive design
+- 登录
+- 登出
+- 首页
+- 电影详情
+- 电影评分
+- 电影评论
+- 电影搜索
+- 深浅主题
+- 自适应
 
-## Project Structure
+## 项目结构
 
-```shellscript
+```sh
 movie-rating/
-├── config/                # Configuration files
-│   └── data/              # Initialization data
+├── config/                # 配置文件
+│   └── data/              # 初始化数据
 ├── src/
-│   ├── app/               # Next.js app router
-│   │   ├── page.tsx       # Home page
-│   │   ├── layout.tsx     # Root layout
-│   │   ├── globals.css    # Global styles
-│   │   └── movie/         # Movie-related routes
-│   │       └── [id]/      # Movie detail page, dynamic route
-│   ├── components/        # React components
-│   │   ├── header/        # Page header components
-│   │   ├── ui/            # Chakra UI generated code
-│   │   └── login-dialog/  # Login dialog component
-│   ├── constants/         # Constant definitions
-│   ├── database/          # Database related
-│   ├── server-actions/    # Server actions, including login, logout, etc.
-│   └── utils/             # Utility functions
-├── next.config.ts         # Next.js configuration
-├── package.json           # Project dependencies
-└── tsconfig.json          # TypeScript configuration
+│   ├── app/               # Next.js 应用路由
+│   │   ├── page.tsx       # 首页
+│   │   ├── layout.tsx     # 根布局
+│   │   ├── globals.css    # 全局样式
+│   │   └── movie/         # 电影相关路由
+│   │       └── [id]/      # 电影详情页，动态路由
+│   ├── components/        # React 组件
+│   │   ├── header/        # 页面头部组件
+│   │   ├── ui/            # chakra 生成代码
+│   │   └── login-dialog/  # 登录对话框组件
+│   ├── constants/         # 常量定义
+│   ├── database/          # 数据库相关
+│   ├── server-actions/    # 服务端操作，包含登录、登出等功能
+│   └── utils/             # 工具函数
+├── next.config.ts         # Next.js 配置
+├── package.json           # 项目依赖
+└── tsconfig.json          # TypeScript 配置
 ```
 
-## Tech Stack
+## 项目技术栈
 
-### Core
+### 基础
 
 - `next.js 15`
 - `react 19`
 
-### Styling
+### 样式
 
 - `chakra ui 3`
 - `tailwindcss 4`
 
-### State Management
+### 状态管理
 
-Not currently used, as the current functionality is simple enough that we don't need to share many states
+暂未使用， 目前功能较为简单暂时不需要共享太多状态
 
-### Backend Interaction
+### 与后端交互
 
-Currently using Next.js `server actions` for backend interaction
+目前使用 `next.js` 的 `server actions` 与后端交互
 
-### Data Validation
+### 数据校验
 
-Using `zod` for data validation
+使用 `zod` 进行数据校验
 
-### Testing
+### 测试
 
-We've chosen `vitest` which is more powerful than `jest` for unit testing
+这里选用了比 `jest` 更为强大的 `vitest` 进行单元测试
 
 - `vitest`
 - `happy-dom`
@@ -74,87 +74,87 @@ We've chosen `vitest` which is more powerful than `jest` for unit testing
 - `@testing-library/react`
 - `@testing-library/user-event`
 
-### Database
+### 数据库
 
-Currently using `redis` to simulate a database, connected via `ioredis`
+当前使用 `redis` 模拟数据库, 使用 `ioredis` 连接
 
-### Others
+### 其他
 
-- `husky` - Git hooks
-- `prettier` - Code formatting
-- `eslint` - Code linting
-- `lint-staged` - Pre-commit checks
+- `husky` - `git hook`
+- `prettier` - 代码格式化
+- `eslint` - 代码检查
+- `lint-staged` - 提交检查
 
-## Getting Started
+## 项目启动
 
-### Prerequisites
+### 前置条件
 
-You need to install:
+需要安装以下内容：
 
-- `node@22` (see `.nvmrc`)
-- `pnpm@9` (see `package.json#packageManager`)
-- `redis`, or use `docker`: run `docker run --name movie-rating-redis -p 6379:6379 -d redis`
+- `node@22` 见 `.nvmrc`
+- `pnpm@9` 见 `package.json#packageManager`
+- `redis`, 或者使用 `docker`: 运行 `docker run --name movie-rating-redis -p 6379:6379 -d redis`
 
-### Install Dependencies
+### 安装项目依赖
 
-```shellscript
+```sh
 pnpm install
 ```
 
-### Initialize Data
+### 初始化数据
 
-#### Local Redis
+#### 本地 redis
 
-Use `docker` to start a `redis` service
+使用 `docker` 启动 `redis` 服务
 
-```shellscript
+```sh
 docker run --name movie-rating-redis -p 6379:6379 -d redis
 ```
 
-```shellscript
+```sh
 pnpm run init:data
 ```
 
-#### Cloud Redis
+#### 云端 redis
 
-To use a cloud-based Redis instance:
+使用云端 `redis` 运行
 
-Add the environment variable to `.env.local`:
+添加环境变量到 `.env.local`
 
-```env
+```sh
 REDIS_URL=redis://...
 ```
 
-Then run:
+然后运行
 
-```shellscript
-pnpm run init:data
+```sh
+REDIS_URL=redis://... pnpm run init:data
 ```
 
-### Start the Project
+### 启动项目
 
-```shellscript
+```sh
 pnpm run dev
 ```
 
-After starting, visit [http://localhost:3000](http://localhost:3000) to access the home page
+项目运行后访问：[http://localhost:3000](http://localhost:3000) 进入首页
 
-## Running Tests
+## 运行测试
 
-Currently, unit test files are in the same folder as the code files, distinguished by suffix:
+目前单元测试文件和代码在同一文件夹下，通过后缀名区分
 
-- `*.ts` for code files
-- `*.spec.ts` for test files
+- `*.ts` 为代码文件
+- `*.spec.ts` 为测试文件
 
-Run tests:
+运行测试
 
-```shellscript
+```sh
 pnpm run test
 ```
 
-### Current Test Coverage
+### 目前的测试覆盖率
 
-```shellscript
+```sh
 --------------------------------|---------|----------|---------|---------|-------------------
 File                            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 --------------------------------|---------|----------|---------|---------|-------------------
@@ -193,6 +193,6 @@ All files                       |   80.48 |    87.05 |   89.28 |   80.48 |
 --------------------------------|---------|----------|---------|---------|-------------------
 ```
 
-## Submitting Code
+## 提交代码
 
-A `pre-commit` hook is configured to format code, check TypeScript types, and run Vitest unit tests when committing code. If any checks fail, the commit will be blocked.
+配置有 `pre-commit` 钩子， 在提交代码时会进行格式化代码 / `typescript` 类型检查 / `vitest` 单元测试， 如果检查不通过会阻止提交
