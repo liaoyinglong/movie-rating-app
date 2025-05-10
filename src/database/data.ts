@@ -20,6 +20,9 @@ function createMockDB<T>(name: 'users' | 'movies' | 'ratings') {
     },
     async getAll() {
       const keys = await redis.keys(`${name}:*`);
+      if (!keys.length) {
+        return [];
+      }
       const data = await redis.mget(keys);
       return data.map((v) => safeParse(v)).filter(Boolean) as T[];
     },
