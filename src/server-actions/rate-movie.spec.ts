@@ -1,6 +1,6 @@
 import { database } from '@/database/data';
 import type { Movie, Rating } from '@/database/types';
-import { errorResponse, ResponseCode } from '@/utils/response';
+import { errorResponse, ResponseCode, successResponse } from '@/utils/response';
 import { describe, expect, it, vi } from 'vitest';
 import { getUserInfo } from './get-user-info';
 import { rateMovie } from './rate-movie';
@@ -124,11 +124,12 @@ describe('rateMovie', () => {
   it('评价成功', async () => {
     vi.mocked(database.movies.get).mockResolvedValueOnce(movieMockData);
     vi.mocked(database.ratings.get).mockResolvedValueOnce(null);
-    await rateMovie({
+    const result = await rateMovie({
       movieId: '1',
       score: 5,
       comment: 'test',
     });
+    expect(result).toEqual(successResponse('评价成功'));
     expect(vi.mocked(database.ratings.set)).toHaveBeenCalledWith(
       '1-1',
       expect.objectContaining({

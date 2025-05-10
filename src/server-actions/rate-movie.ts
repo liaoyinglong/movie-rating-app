@@ -1,6 +1,6 @@
 'use server';
 import { database } from '@/database/data';
-import { errorResponse, ResponseCode } from '@/utils/response';
+import { errorResponse, ResponseCode, successResponse } from '@/utils/response';
 import { revalidatePath } from 'next/cache';
 import 'server-only';
 import z from 'zod';
@@ -75,4 +75,5 @@ export async function rateMovie(params: z.infer<typeof rateMovieSchema>) {
   movie.averageRating = Math.floor(movie.totalRating / movie.ratingCount);
   await database.movies.set(movieId, movie);
   revalidatePath(`/movie/${movieId}`);
+  return successResponse('评价成功');
 }
