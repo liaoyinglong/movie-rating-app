@@ -1,0 +1,86 @@
+import { Pagination } from '@/components/pagination';
+import {
+  pageSearchMovies,
+  type pageSearchMoviesSchema,
+} from '@/server-actions/page-search-movies';
+import { EmptyState, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { unstable_ViewTransition as ViewTransition } from 'react';
+import { LuSearch } from 'react-icons/lu';
+import type z from 'zod';
+import MoviePoster from '../assets/movie-poster.png';
+
+export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
+  const { data } = await pageSearchMovies(props);
+  const { movies, total, pageSize, pageIndex } = data;
+
+  return (
+    <>
+      <div
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        data-testid="movie-grid"
+      >
+        {movies.length ? (
+          movies.map((movie) => (
+            <Link
+              key={movie.id}
+              href={`/movie/${movie.id}`}
+              className="flex flex-col overflow-hidden rounded-xl shadow-md transition-shadow duration-200 hover:shadow-lg dark:bg-gray-800 dark:shadow-lg dark:hover:shadow-xl"
+            >
+              <ViewTransition name={`movie-${movie.id}`} update={'none'}>
+                <Image
+                  src={MoviePoster}
+                  alt={movie.title}
+                  className="h-64 w-full object-cover"
+                />
+              </ViewTransition>
+              <div className="flex flex-1 flex-col p-4">
+                <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
+                  {movie.title}
+                </h2>
+                <div className="mb-2 flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <span>平均分：</span>
+                  <span className="font-bold text-blue-600 dark:text-blue-400">
+                    {movie.averageRating ?? 0}
+                  </span>
+                  <span className="mx-1 text-gray-400 dark:text-gray-500">
+                    /
+                  </span>
+                  <span>评分人次：</span>
+                  <span className="font-bold text-gray-900 dark:text-gray-100">
+                    {movie.ratingCount ?? 0}
+                  </span>
+                </div>
+                <p className="flex-1 text-sm text-gray-600 dark:text-gray-400">
+                  {movie.description}
+                </p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <EmptyState.Root
+            className={'col-span-full'}
+            data-testid="empty-state"
+          >
+            <EmptyState.Content>
+              <EmptyState.Indicator>
+                <LuSearch />
+              </EmptyState.Indicator>
+              <VStack textAlign="center">
+                <EmptyState.Title>没有找到相关电影</EmptyState.Title>
+                <EmptyState.Description>
+                  请尝试使用其他关键词进行搜索
+                </EmptyState.Description>
+              </VStack>
+            </EmptyState.Content>
+          </EmptyState.Root>
+        )}
+      </div>
+
+      {!!total && (
+        <Pagination total={total} pageSize={pageSize} page={pageIndex} />
+      )}
+    </>
+  );
+}

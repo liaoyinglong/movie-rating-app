@@ -1,0 +1,9 @@
+@layer theme, base, components, reset, tokens, recipes, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+
+@custom-variant dark (&:is(.dark *));
+
+@layer utilities {
+  @tailwind utilities;
+}
