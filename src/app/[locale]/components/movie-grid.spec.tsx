@@ -1,5 +1,5 @@
 import { pageSearchMovies } from '@/server-actions/page-search-movies';
-import { render, screen } from '@/utils/test-utils';
+import { render } from '@/utils/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { MovieGrid } from './movie-grid';
 
@@ -43,11 +43,11 @@ describe('MovieGrid', () => {
       q: '',
     });
 
-    render(el);
+    const { queryByTestId, getByTestId } = render(el);
 
-    expect(screen.getByTestId('movie-grid').childNodes.length).toBe(2);
-    expect(screen.queryByTestId('empty-state')).toBeNull();
-    expect(screen.getByTestId('pagination')).toBeDefined();
+    expect(getByTestId('movie-grid').childNodes.length).toBe(2);
+    expect(queryByTestId('empty-state')).toBeNull();
+    expect(getByTestId('pagination')).toBeDefined();
   });
 
   it('无数据时渲染空状态', async () => {
@@ -68,8 +68,8 @@ describe('MovieGrid', () => {
       q: '',
     });
 
-    render(el);
+    const { getByTestId } = render(el);
 
-    expect(screen.getByTestId('empty-state')).toBeDefined();
+    expect(getByTestId('empty-state')).toBeDefined();
   });
 });

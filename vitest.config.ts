@@ -24,9 +24,9 @@ export default defineConfig({
       exclude: [
         'src/components/ui/**',
         'src/database/**',
-        'src/app/version/**',
-        'src/app/layout.tsx',
-        'src/app/not-found.tsx',
+        'src/app/\\[locale\\]/version/**',
+        'src/app/\\[locale\\]/layout.tsx',
+        'src/app/\\[locale\\]/\\[...catchall\\]/**',
       ],
     },
   },

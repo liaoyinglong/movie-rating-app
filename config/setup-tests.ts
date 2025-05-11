@@ -23,6 +23,14 @@ vi.mock('next/image', () => {
   };
 });
 
+vi.mock('next/navigation', () => {
+  return {
+    usePathname: vi.fn(),
+    useRouter: vi.fn(),
+    useSearchParams: vi.fn(),
+  };
+});
+
 vi.mock('react-i18next', () => {
   return {
     // this mock makes sure any components using the translate hook can use it without a warning being shown

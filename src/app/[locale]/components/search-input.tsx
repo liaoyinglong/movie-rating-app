@@ -20,8 +20,11 @@ export function SearchInput() {
         className="max-w-md"
         name="q"
         defaultValue={searchParams.get('q') ?? void 0}
+        data-testid="search-input"
       />
-      <Button type="submit">{t('home:submit')}</Button>
+      <Button type="submit" data-testid="search-input-submit">
+        {t('home:submit')}
+      </Button>
     </form>
   );
 }
