@@ -1,8 +1,11 @@
-import { getRedirectUrl } from 'next/experimental/testing/server';
+import {
+  getRedirectUrl,
+  unstable_doesMiddlewareMatch,
+} from 'next/experimental/testing/server';
 import { NextRequest } from 'next/server';
 import { describe, expect, it } from 'vitest';
 import { CookieIds } from './constants/cookie-ids';
-import { middleware } from './middleware';
+import { config, middleware } from './middleware';
 
 describe('middleware', () => {
   const BASE_URL = 'http://localhost:3000';
@@ -110,6 +113,59 @@ describe('middleware', () => {
       const response = await middleware(request);
       expect(response).toBeDefined();
       expect(getRedirectUrl(response!)).toBeNull();
+    });
+
+    it('忽略 _rsc 请求', async () => {
+      const request = new NextRequest(`${BASE_URL}/en-US/movie/1?_rsc=1`);
+      const response = await middleware(request);
+      expect(response).toBeDefined();
+      expect(getRedirectUrl(response!)).toBeNull();
+    });
+  });
+
+  describe('middleware 匹配', () => {
+    it('should match middleware', async () => {
+      [
+        {
+          url: '/',
+          expected: true,
+        },
+        {
+          url: '/en-US/',
+          expected: true,
+        },
+        {
+          url: '/api/test',
+          expected: false,
+        },
+        {
+          url: '/_next/static',
+          expected: false,
+        },
+        {
+          url: '/_next/image',
+          expected: false,
+        },
+        {
+          url: '/favicon.ico',
+          expected: false,
+        },
+        {
+          url: '/_vercel',
+          expected: false,
+        },
+        {
+          url: '/movie/1',
+          expected: true,
+        },
+      ].forEach(async (item) => {
+        expect(
+          unstable_doesMiddlewareMatch({
+            config,
+            url: item.url,
+          }),
+        ).toBe(item.expected);
+      });
     });
   });
 });

@@ -22,6 +22,11 @@ function getLocale(req: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
+  // 不对 rsc 请求进行处理
+  if (request.nextUrl.searchParams.has('_rsc')) {
+    return NextResponse.next();
+  }
+
   const pathname = request.nextUrl.pathname;
 
   const localeFromPathname = pathname.split('/')[1] as string;
@@ -54,7 +59,9 @@ export async function middleware(request: NextRequest) {
     }
   }
   const response = NextResponse.next();
-  response.cookies.set(CookieIds.Locale, localeFromPathname);
+  if (!request.cookies.has(CookieIds.Locale)) {
+    response.cookies.set(CookieIds.Locale, localeFromPathname);
+  }
 
   return response;
 }
