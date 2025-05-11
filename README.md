@@ -13,6 +13,7 @@
 - Movie search
 - Dark/Light theme switching
 - Responsive design
+- Internationalization
 
 ## Project Architecture
 
