@@ -149,42 +149,49 @@ pnpm run test
 ### 当前测试覆盖率
 
 ```plaintext
---------------------------------|---------|----------|---------|---------|-------------------
-File                            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
---------------------------------|---------|----------|---------|---------|-------------------
-All files                       |   80.48 |    87.05 |   89.28 |   80.48 |
- app                            |       0 |      100 |     100 |       0 |
-  page.tsx                      |       0 |      100 |     100 |       0 | 3-25
- app/components                 |   76.08 |      100 |     100 |   76.08 |
-  movie-grid.tsx                |     100 |      100 |     100 |     100 |
-  search-input.tsx              |       0 |      100 |     100 |       0 | 2-26
- app/movie/[id]                 |   63.86 |     87.5 |      50 |   63.86 |
-  page.tsx                      |   63.86 |     87.5 |      50 |   63.86 | 81,103-155
- app/movie/[id]/components      |    90.9 |     37.5 |   66.66 |    90.9 |
-  rating-trigger.tsx            |    90.9 |     37.5 |   66.66 |    90.9 | 27-32,39-41
- components                     |   96.26 |    66.66 |     100 |   96.26 |
-  login-dialog.tsx              |   94.18 |    57.14 |     100 |   94.18 | 26-30
-  pagination.tsx                |     100 |      100 |     100 |     100 |
- components/header              |      40 |      100 |      75 |      40 |
-  header-user-info.tsx          |   84.21 |      100 |   66.66 |   84.21 | 37-45
-  index.tsx                     |       0 |      100 |     100 |       0 | 2-83
- constants                      |     100 |      100 |     100 |     100 |
-  cookie-ids.ts                 |     100 |      100 |     100 |     100 |
-  modal-ids.ts                  |     100 |      100 |     100 |     100 |
- server-actions                 |     100 |    94.73 |     100 |     100 |
-  check-user-is-rated.ts        |     100 |      100 |     100 |     100 |
-  get-user-info.ts              |     100 |      100 |     100 |     100 |
-  login.ts                      |     100 |      100 |     100 |     100 |
-  logout.ts                     |     100 |      100 |     100 |     100 |
-  movie-detail.ts               |     100 |      100 |     100 |     100 |
-  page-search-movie-comments.ts |     100 |    77.77 |     100 |     100 | 31,46
-  page-search-movies.ts         |     100 |      100 |     100 |     100 |
-  rate-movie.ts                 |     100 |      100 |     100 |     100 |
- utils                          |     100 |      100 |     100 |     100 |
-  base-page-search-schema.ts    |     100 |      100 |     100 |     100 |
-  response.ts                   |     100 |      100 |     100 |     100 |
-  test-utils.tsx                |     100 |      100 |     100 |     100 |
---------------------------------|---------|----------|---------|---------|-------------------
+----------------------------------------|---------|----------|---------|---------|-------------------
+File                                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------------------------------------|---------|----------|---------|---------|-------------------
+All files                               |   78.45 |     86.6 |   88.23 |   78.45 |
+ src                                    |     100 |      100 |     100 |     100 |
+  middleware.ts                         |     100 |      100 |     100 |     100 |
+ src/app/[locale]                       |       0 |        0 |       0 |       0 |
+  page.tsx                              |       0 |        0 |       0 |       0 | 1-26
+ src/app/[locale]/components            |     100 |      100 |     100 |     100 |
+  movie-grid.tsx                        |     100 |      100 |     100 |     100 |
+  search-input.tsx                      |     100 |      100 |     100 |     100 |
+ src/app/[locale]/movie/[id]            |   65.35 |     87.5 |      50 |   65.35 |
+  page.tsx                              |   65.35 |     87.5 |      50 |   65.35 | 86,108-160
+ src/app/[locale]/movie/[id]/components |   91.17 |     37.5 |   66.66 |   91.17 |
+  rating-trigger.tsx                    |   91.17 |     37.5 |   66.66 |   91.17 | 28-33,40-42
+ src/components                         |   96.29 |    66.66 |     100 |   96.29 |
+  login-dialog.tsx                      |   94.25 |    57.14 |     100 |   94.25 | 28-32
+  pagination.tsx                        |     100 |      100 |     100 |     100 |
+ src/components/header                  |   30.81 |      100 |      75 |   30.81 |
+  header-user-info.tsx                  |   84.48 |      100 |   66.66 |   84.48 | 39-47
+  index.tsx                             |       0 |      100 |     100 |       0 | 2-124
+ src/constants                          |     100 |      100 |     100 |     100 |
+  cookie-ids.ts                         |     100 |      100 |     100 |     100 |
+  modal-ids.ts                          |     100 |      100 |     100 |     100 |
+ src/i18n                               |   59.61 |    81.81 |     100 |   59.61 |
+  client-provider.tsx                   |       0 |      100 |     100 |       0 | 2-14
+  client.ts                             |       0 |      100 |     100 |       0 | 2-37
+  config.ts                             |     100 |      100 |     100 |     100 |
+  server.ts                             |   93.87 |       75 |     100 |   93.87 | 51-53
+  shared-options.ts                     |     100 |      100 |     100 |     100 |
+ src/server-actions                     |     100 |       95 |     100 |     100 |
+  check-user-is-rated.ts                |     100 |      100 |     100 |     100 |
+  get-user-info.ts                      |     100 |      100 |     100 |     100 |
+  login.ts                              |     100 |      100 |     100 |     100 |
+  logout.ts                             |     100 |      100 |     100 |     100 |
+  movie-detail.ts                       |     100 |      100 |     100 |     100 |
+  page-search-movie-comments.ts         |     100 |    77.77 |     100 |     100 | 31,46
+  page-search-movies.ts                 |     100 |      100 |     100 |     100 |
+  rate-movie.ts                         |     100 |      100 |     100 |     100 |
+ src/utils                              |   93.33 |       75 |     100 |   93.33 |
+  base-page-search-schema.ts            |     100 |      100 |     100 |     100 |
+  response.ts                           |      92 |       75 |     100 |      92 | 29-30
+----------------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 ## 开发规范
