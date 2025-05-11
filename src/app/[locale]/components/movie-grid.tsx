@@ -28,15 +28,17 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
             <Link
               key={movie.id}
               href={`/movie/${movie.id}`}
-              className="flex flex-col overflow-hidden rounded-xl shadow-md transition-shadow duration-200 hover:shadow-lg dark:bg-gray-800 dark:shadow-lg dark:hover:shadow-xl"
+              className="group flex flex-col overflow-hidden rounded-xl shadow transition-shadow duration-200 hover:shadow-xl dark:bg-gray-800"
             >
-              <ViewTransition name={`movie-${movie.id}`} update={'none'}>
-                <Image
-                  src={MoviePoster}
-                  alt={movie.title}
-                  className="h-64 w-full object-cover"
-                />
-              </ViewTransition>
+              <div className="overflow-hidden">
+                <ViewTransition name={`movie-${movie.id}`} update={'none'}>
+                  <Image
+                    src={MoviePoster}
+                    alt={movie.title}
+                    className="h-64 w-full object-cover transition-all duration-200 group-hover:scale-105"
+                  />
+                </ViewTransition>
+              </div>
               <div className="flex flex-1 flex-col p-4">
                 <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
                   {movie.title}
