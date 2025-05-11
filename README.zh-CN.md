@@ -64,9 +64,9 @@ movie-rating/
 - **Happy DOM** - 用于测试的 DOM 环境
 - **Testing Library** - 用户交互测试工具
 
-- `@testing-library/dom`
-- `@testing-library/react`
-- `@testing-library/user-event`
+  - `@testing-library/dom`
+  - `@testing-library/react`
+  - `@testing-library/user-event`
 
 ### 数据存储
 

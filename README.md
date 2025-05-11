@@ -66,9 +66,9 @@ movie-rating/
 - **Happy DOM** - DOM environment for testing
 - **Testing Library** - User interaction testing tools
 
-- `@testing-library/dom`
-- `@testing-library/react`
-- `@testing-library/user-event`
+  - `@testing-library/dom`
+  - `@testing-library/react`
+  - `@testing-library/user-event`
 
 ### Data Storage
 
