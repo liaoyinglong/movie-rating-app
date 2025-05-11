@@ -152,7 +152,7 @@ pnpm run test
 ----------------------------------------|---------|----------|---------|---------|-------------------
 File                                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 ----------------------------------------|---------|----------|---------|---------|-------------------
-All files                               |   78.45 |     86.6 |   88.23 |   78.45 |
+All files                               |   78.07 |    86.84 |   88.88 |   78.07 |
  src                                    |     100 |      100 |     100 |     100 |
   middleware.ts                         |     100 |      100 |     100 |     100 |
  src/app/[locale]                       |       0 |        0 |       0 |       0 |
@@ -160,19 +160,21 @@ All files                               |   78.45 |     86.6 |   88.23 |   78.45
  src/app/[locale]/components            |     100 |      100 |     100 |     100 |
   movie-grid.tsx                        |     100 |      100 |     100 |     100 |
   search-input.tsx                      |     100 |      100 |     100 |     100 |
- src/app/[locale]/movie/[id]            |   65.35 |     87.5 |      50 |   65.35 |
-  page.tsx                              |   65.35 |     87.5 |      50 |   65.35 | 86,108-160
+ src/app/[locale]/movie/[id]            |   65.89 |     87.5 |      50 |   65.89 |
+  page.tsx                              |   65.89 |     87.5 |      50 |   65.89 | 88,110-162
  src/app/[locale]/movie/[id]/components |   91.17 |     37.5 |   66.66 |   91.17 |
   rating-trigger.tsx                    |   91.17 |     37.5 |   66.66 |   91.17 | 28-33,40-42
- src/components                         |   96.29 |    66.66 |     100 |   96.29 |
+ src/components                         |   96.57 |       70 |     100 |   96.57 |
   login-dialog.tsx                      |   94.25 |    57.14 |     100 |   94.25 | 28-32
   pagination.tsx                        |     100 |      100 |     100 |     100 |
- src/components/header                  |   30.81 |      100 |      75 |   30.81 |
+ src/components/header                  |   29.87 |      100 |      75 |   29.87 |
   header-user-info.tsx                  |   84.48 |      100 |   66.66 |   84.48 | 39-47
-  index.tsx                             |       0 |      100 |     100 |       0 | 2-124
+  index.tsx                             |       0 |      100 |     100 |       0 | 2-130
  src/constants                          |     100 |      100 |     100 |     100 |
   cookie-ids.ts                         |     100 |      100 |     100 |     100 |
   modal-ids.ts                          |     100 |      100 |     100 |     100 |
+ src/hooks                              |       0 |      100 |     100 |       0 |
+  useLocale.ts                          |       0 |      100 |     100 |       0 | 4-9
  src/i18n                               |   59.61 |    81.81 |     100 |   59.61 |
   client-provider.tsx                   |       0 |      100 |     100 |       0 | 2-14
   client.ts                             |       0 |      100 |     100 |       0 | 2-37
