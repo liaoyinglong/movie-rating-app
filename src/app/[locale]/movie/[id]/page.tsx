@@ -48,6 +48,8 @@ export default async function MoviePage(props: {
             src={MoviePoster}
             alt={t('movie:poster-alt')}
             className={'w-full rounded'}
+            priority
+            loading="eager"
           />
         </ViewTransition>
 

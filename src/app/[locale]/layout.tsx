@@ -32,7 +32,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className={`${geistSans.className} antialiased`}>
         <EmotionSetup>
           <I18nClientProvider>
             <Provider>

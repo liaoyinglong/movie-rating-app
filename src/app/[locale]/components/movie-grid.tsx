@@ -36,6 +36,8 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
                     src={MoviePoster}
                     alt={movie.title}
                     className="h-64 w-full object-cover transition-all duration-200 group-hover:scale-105"
+                    priority
+                    loading="eager"
                   />
                 </ViewTransition>
               </div>
