@@ -1,7 +1,11 @@
 import { defaultLocale, locales } from '@/i18n/config';
 import { match as matchLocale } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
-import { NextResponse, type NextRequest } from 'next/server';
+import {
+  NextResponse,
+  type MiddlewareConfig,
+  type NextRequest,
+} from 'next/server';
 import { CookieIds } from './constants/cookie-ids';
 
 function getLocale(req: NextRequest): string {
@@ -22,11 +26,6 @@ function getLocale(req: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
-  // 不对 rsc 请求进行处理
-  if (request.nextUrl.searchParams.has('_rsc')) {
-    return NextResponse.next();
-  }
-
   const pathname = request.nextUrl.pathname;
 
   const localeFromPathname = pathname.split('/')[1] as string;
@@ -66,9 +65,9 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-export const config = {
+export const config: MiddlewareConfig = {
   // Match all pathnames except for
   // - … if they start with `/api`, `/trpc`, `/_next` or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
+  matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)'],
 };

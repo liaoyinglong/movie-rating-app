@@ -114,13 +114,6 @@ describe('middleware', () => {
       expect(response).toBeDefined();
       expect(getRedirectUrl(response!)).toBeNull();
     });
-
-    it('忽略 _rsc 请求', async () => {
-      const request = new NextRequest(`${BASE_URL}/en-US/movie/1?_rsc=1`);
-      const response = await middleware(request);
-      expect(response).toBeDefined();
-      expect(getRedirectUrl(response!)).toBeNull();
-    });
   });
 
   describe('middleware 匹配', () => {
