@@ -1,0 +1,9 @@
+{
+  "title": "电影推荐",
+  "search": "搜索电影...",
+  "submit": "确定",
+  "average-rating": "平均分",
+  "rating-count": "评分人次",
+  "no-movies-found": "没有找到相关电影",
+  "try-again": "请尝试使用其他关键词进行搜索"
+}

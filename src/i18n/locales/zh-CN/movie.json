@@ -1,0 +1,18 @@
+{
+  "rating": "评价",
+  "rating-success": "评价成功",
+  "rating-failed": "评价失败",
+  "rating-comment-placeholder": "写下你的评论...",
+  "rating-cancel": "取消",
+  "rating-submit": "提交",
+  "rating-trigger": "去评价",
+  "poster-alt": "电影大图",
+  "info-section": "电影信息",
+  "genre-label": "类型：",
+  "release-date-label": "上映时间：",
+  "average-rating-label": "平均分：",
+  "rating-count-label": "评分人数：",
+  "user-rated": "已评价",
+  "user-comments": "用户评论",
+  "no-comments": "暂无评论"
+}

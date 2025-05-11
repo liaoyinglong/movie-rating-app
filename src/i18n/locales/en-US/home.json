@@ -1,0 +1,9 @@
+{
+  "title": "Movie Recommendations",
+  "search": "Search movies...",
+  "submit": "Submit",
+  "average-rating": "Average Score",
+  "rating-count": "Number of Ratings",
+  "no-movies-found": "No movies found",
+  "try-again": "Please try searching with other keywords"
+}

@@ -4,6 +4,7 @@ import type { User } from '@/database/types';
 import { logout } from '@/server-actions/logout';
 import { Button, Menu, Portal } from '@chakra-ui/react';
 import { startTransition, use, useOptimistic } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoginDialog } from '../login-dialog';
 import { toaster } from '../ui/toaster';
 export function UserInfo(props: {
@@ -14,6 +15,7 @@ export function UserInfo(props: {
   const userName = userInfo?.username;
 
   const [isPending, setIsPending] = useOptimistic(false);
+  const { t } = useTranslation('header');
 
   return isLoggedIn ? (
     <Menu.Root>
@@ -25,7 +27,7 @@ export function UserInfo(props: {
           px={2}
           data-testid="user-info-button"
         >
-          你好，{userName}
+          {t('header:greeting', { userName })}
         </Button>
       </Menu.Trigger>
       <Portal>
@@ -38,13 +40,13 @@ export function UserInfo(props: {
                 startTransition(async () => {
                   await logout();
                   toaster.create({
-                    description: '退出登录成功',
+                    description: t('header:logout-success'),
                     type: 'success',
                   });
                 });
               }}
             >
-              退出登录
+              {t('header:logout')}
             </Menu.Item>
           </Menu.Content>
         </Menu.Positioner>
@@ -60,7 +62,7 @@ export function UserInfo(props: {
       }}
       data-testid="login-button"
     >
-      登录
+      {t('header:login')}
     </Button>
   );
 }

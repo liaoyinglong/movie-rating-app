@@ -13,9 +13,10 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { useActionState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MdStar } from 'react-icons/md';
-
 export function RatingTrigger(props: { movieId: string }) {
+  const { t } = useTranslation('movie');
   const [, rateFormAction, isPending] = useActionState(
     async (state: void, formData: FormData) => {
       const result = await rateMovie({
@@ -25,14 +26,14 @@ export function RatingTrigger(props: { movieId: string }) {
       });
       if (result?.success) {
         toaster.create({
-          description: '评价成功',
+          description: t('movie:rating-success'),
           type: 'success',
         });
         return;
       }
 
       toaster.create({
-        description: result?.errorMessage ?? '评价失败',
+        description: result?.errorMessage ?? t('movie:rating-failed'),
         type: 'error',
       });
       if (result?.code === ResponseCode.Unauthorized) {
@@ -53,7 +54,7 @@ export function RatingTrigger(props: { movieId: string }) {
           data-testid="rating-trigger"
         >
           <MdStar size={20} />
-          去评价
+          {t('movie:rating-trigger')}
         </Button>
       </Dialog.Trigger>
       <Portal>
@@ -67,7 +68,7 @@ export function RatingTrigger(props: { movieId: string }) {
               <CloseButton size="sm" />
             </Dialog.CloseTrigger>
             <Dialog.Header>
-              <Dialog.Title>评价</Dialog.Title>
+              <Dialog.Title>{t('movie:rating')}</Dialog.Title>
             </Dialog.Header>
             <Dialog.Context>
               {(store) => {
@@ -82,7 +83,7 @@ export function RatingTrigger(props: { movieId: string }) {
                         <RatingGroup.Control />
                       </RatingGroup.Root>
                       <Textarea
-                        placeholder="写下你的评论..."
+                        placeholder={t('movie:rating-comment-placeholder')}
                         size="lg"
                         autoresize
                         name={'comment'}
@@ -96,14 +97,14 @@ export function RatingTrigger(props: { movieId: string }) {
                         onClick={() => store.setOpen(false)}
                         data-testid="rating-dialog-cancel"
                       >
-                        取消
+                        {t('movie:rating-cancel')}
                       </Button>
                       <Button
                         type={'submit'}
                         loading={isPending}
                         data-testid="rating-dialog-submit"
                       >
-                        提交
+                        {t('movie:rating-submit')}
                       </Button>
                     </Dialog.Footer>
                   </form>

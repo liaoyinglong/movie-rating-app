@@ -1,4 +1,5 @@
 import { Pagination } from '@/components/pagination';
+import { getServerI18n } from '@/i18n/server';
 import {
   pageSearchMovies,
   type pageSearchMoviesSchema,
@@ -10,10 +11,11 @@ import { unstable_ViewTransition as ViewTransition } from 'react';
 import { LuSearch } from 'react-icons/lu';
 import type z from 'zod';
 import MoviePoster from '../assets/movie-poster.png';
-
 export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
   const { data } = await pageSearchMovies(props);
   const { movies, total, pageSize, pageIndex } = data;
+
+  const { t } = await getServerI18n('home');
 
   return (
     <>
@@ -40,14 +42,14 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
                   {movie.title}
                 </h2>
                 <div className="mb-2 flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                  <span>平均分：</span>
+                  <span>{t('home:average-rating')}</span>
                   <span className="font-bold text-blue-600 dark:text-blue-400">
                     {movie.averageRating ?? 0}
                   </span>
                   <span className="mx-1 text-gray-400 dark:text-gray-500">
                     /
                   </span>
-                  <span>评分人次：</span>
+                  <span>{t('home:rating-count')}</span>
                   <span className="font-bold text-gray-900 dark:text-gray-100">
                     {movie.ratingCount ?? 0}
                   </span>
@@ -68,9 +70,9 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
                 <LuSearch />
               </EmptyState.Indicator>
               <VStack textAlign="center">
-                <EmptyState.Title>没有找到相关电影</EmptyState.Title>
+                <EmptyState.Title>{t('home:no-movies-found')}</EmptyState.Title>
                 <EmptyState.Description>
-                  请尝试使用其他关键词进行搜索
+                  {t('home:try-again')}
                 </EmptyState.Description>
               </VStack>
             </EmptyState.Content>

@@ -10,11 +10,13 @@ import {
   Portal,
 } from '@chakra-ui/react';
 import { useActionState, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toaster } from './ui/toaster';
 
 export const LoginDialog = createOverlay((props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { t } = useTranslation('header');
 
   const [, formAction, isPending] = useActionState(
     async () => {
@@ -24,13 +26,13 @@ export const LoginDialog = createOverlay((props) => {
       });
       if (result?.success) {
         toaster.create({
-          description: '登录成功',
+          description: t('header:login-success'),
           type: 'success',
         });
         LoginDialog.close(ModalIds.LoginDialog);
       } else {
         toaster.create({
-          description: result?.errorMessage ?? '登录失败',
+          description: result?.errorMessage ?? t('header:login-failed'),
           type: 'error',
         });
       }
@@ -51,16 +53,14 @@ export const LoginDialog = createOverlay((props) => {
               <CloseButton size="sm" data-testid="login-dialog-close-button" />
             </Dialog.CloseTrigger>
             <Dialog.Header>
-              <Dialog.Title>登录</Dialog.Title>
+              <Dialog.Title>{t('header:login')}</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body spaceY="4">
-              <Dialog.Description>
-                无需注册，首次登录即自动注册。
-              </Dialog.Description>
+              <Dialog.Description>{t('header:login-desc')}</Dialog.Description>
               <form className="flex flex-col gap-2" action={formAction}>
                 <Field.Root required>
                   <Field.Label>
-                    用户名 <Field.RequiredIndicator />
+                    {t('header:username')} <Field.RequiredIndicator />
                   </Field.Label>
                   <Input
                     placeholder="123"
@@ -72,7 +72,7 @@ export const LoginDialog = createOverlay((props) => {
                 </Field.Root>
                 <Field.Root required>
                   <Field.Label>
-                    密码 <Field.RequiredIndicator />
+                    {t('header:password')} <Field.RequiredIndicator />
                   </Field.Label>
                   <Input
                     type={'password'}
@@ -90,7 +90,7 @@ export const LoginDialog = createOverlay((props) => {
                   className={'mt-4'}
                   data-testid="login-dialog-submit-button"
                 >
-                  登录
+                  {t('header:login')}
                 </Button>
               </form>
             </Dialog.Body>

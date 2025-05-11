@@ -1,11 +1,12 @@
 'use client';
 import { Button, Input } from '@chakra-ui/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 export function SearchInput() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
+  const { t } = useTranslation('home');
   const handleSubmit = (formData: FormData) => {
     const q = formData.get('q');
     const href = q ? `${pathname}?q=${q}` : pathname;
@@ -15,12 +16,12 @@ export function SearchInput() {
   return (
     <form className="mb-8 flex justify-center gap-2" action={handleSubmit}>
       <Input
-        placeholder="搜索电影..."
+        placeholder={t('search')}
         className="max-w-md"
         name="q"
         defaultValue={searchParams.get('q') ?? void 0}
       />
-      <Button type="submit">确定</Button>
+      <Button type="submit">{t('home:submit')}</Button>
     </form>
   );
 }

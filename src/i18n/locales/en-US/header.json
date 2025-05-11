@@ -1,0 +1,12 @@
+{
+  "greeting": "Hello, {{userName}}",
+  "logout-success": "Logged out successfully",
+  "logout": "Log out",
+  "login": "Log in",
+  "home": "Home",
+  "login-success": "Login successful",
+  "login-failed": "Login failed",
+  "login-desc": "No registration required. First login will automatically register.",
+  "username": "Username",
+  "password": "Password"
+}

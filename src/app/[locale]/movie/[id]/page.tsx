@@ -1,5 +1,6 @@
 import MoviePoster from '@/app/[locale]/assets/movie-poster.png';
 import { Pagination } from '@/components/pagination';
+import { getServerI18n } from '@/i18n/server';
 import { checkUserIsRated } from '@/server-actions/check-user-is-rated';
 import { getMovieDetail } from '@/server-actions/movie-detail';
 import {
@@ -27,6 +28,7 @@ export default async function MoviePage(props: {
   }
 
   const userIsRated = await checkUserIsRated(id);
+  const { t } = await getServerI18n('movie');
 
   return (
     <div className="min-h-screen transition-colors">
@@ -44,7 +46,7 @@ export default async function MoviePage(props: {
         <ViewTransition name={`movie-${movie.id}`} update={'none'}>
           <Image
             src={MoviePoster}
-            alt="电影大图"
+            alt={t('movie:poster-alt')}
             className={'w-full rounded'}
           />
         </ViewTransition>
@@ -56,19 +58,23 @@ export default async function MoviePage(props: {
           </h2>
           <div className="mb-1 flex flex-wrap gap-4 text-base text-gray-600 dark:text-gray-300">
             <span className="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-              类型：{movie.genre.join(' / ')}
+              {t('movie:genre-label')}
+              {movie.genre.join(' / ')}
             </span>
             <span className="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-              上映时间：{new Date(movie.releaseDate).toLocaleDateString()}
+              {t('movie:release-date-label')}
+              {new Date(movie.releaseDate).toLocaleDateString()}
             </span>
             {!!movie.averageRating && (
               <span className="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-                平均分：{movie.averageRating}
+                {t('movie:average-rating-label')}
+                {movie.averageRating}
               </span>
             )}
             {!!movie.ratingCount && (
               <span className="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800">
-                评分人数：{movie.ratingCount}
+                {t('movie:rating-count-label')}
+                {movie.ratingCount}
               </span>
             )}
           </div>
@@ -76,7 +82,6 @@ export default async function MoviePage(props: {
             {movie.description}
           </p>
         </div>
-        {/* 目前在单元测试中，不能重复渲染 async 组件 */}
         {process.env.VITEST ? null : (
           <CommentSection id={id} searchParams={props.searchParams} />
         )}
@@ -91,7 +96,7 @@ export default async function MoviePage(props: {
           data-testid="user-rated-button"
         >
           <MdCheck size={20} />
-          已评价
+          {t('movie:user-rated')}
         </Button>
       ) : (
         <RatingTrigger movieId={id} />
@@ -111,10 +116,10 @@ async function CommentSection(props: {
   });
 
   const { ratings, total, pageSize, pageIndex } = result.data;
-
+  const { t } = await getServerI18n('movie');
   return (
     <section className="mx-auto max-w-3xl">
-      <h3 className="mb-4 text-2xl font-bold">用户评论</h3>
+      <h3 className="mb-4 text-2xl font-bold">{t('movie:user-comments')}</h3>
       {ratings.length ? (
         <div className="space-y-4">
           {ratings.map((item) => {
@@ -144,7 +149,7 @@ async function CommentSection(props: {
           })}
         </div>
       ) : (
-        <p className="text-gray-500">暂无评论</p>
+        <p className="text-gray-500">{t('movie:no-comments')}</p>
       )}
 
       {!!total && (

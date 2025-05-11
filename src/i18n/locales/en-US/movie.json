@@ -1,0 +1,18 @@
+{
+  "rating": "Rating",
+  "rating-success": "Rating successful",
+  "rating-failed": "Rating failed",
+  "rating-comment-placeholder": "Write your comment...",
+  "rating-cancel": "Cancel",
+  "rating-submit": "Submit",
+  "rating-trigger": "Rate now",
+  "poster-alt": "Movie poster",
+  "info-section": "Movie Info",
+  "genre-label": "Genre:",
+  "release-date-label": "Release Date:",
+  "average-rating-label": "Average Score:",
+  "rating-count-label": "Number of Ratings:",
+  "user-rated": "Rated",
+  "user-comments": "User Comments",
+  "no-comments": "No comments yet"
+}
