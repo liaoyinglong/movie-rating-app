@@ -1,4 +1,4 @@
-import MoviePoster from '@/app/assets/movie-poster.png';
+import MoviePoster from '@/app/[locale]/assets/movie-poster.png';
 import { Pagination } from '@/components/pagination';
 import { checkUserIsRated } from '@/server-actions/check-user-is-rated';
 import { getMovieDetail } from '@/server-actions/movie-detail';
