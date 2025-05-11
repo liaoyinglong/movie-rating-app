@@ -15,7 +15,7 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
   const { data } = await pageSearchMovies(props);
   const { movies, total, pageSize, pageIndex } = data;
 
-  const { t } = await getServerI18n('home');
+  const { t, locale } = await getServerI18n('home');
 
   return (
     <>
@@ -27,7 +27,7 @@ export async function MovieGrid(props: z.infer<typeof pageSearchMoviesSchema>) {
           movies.map((movie) => (
             <Link
               key={movie.id}
-              href={`/movie/${movie.id}`}
+              href={`/${locale}/movie/${movie.id}`}
               className="group flex flex-col overflow-hidden rounded-xl shadow transition-shadow duration-200 hover:shadow-xl dark:bg-gray-800"
             >
               <div className="overflow-hidden">

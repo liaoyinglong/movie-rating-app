@@ -1,5 +1,6 @@
 'use client';
 import { ModalIds } from '@/constants/modal-ids';
+import { useLocale } from '@/hooks/useLocale';
 import { Locale } from '@/i18n/config';
 import {
   Button,
@@ -19,10 +20,11 @@ import { LoginDialog } from '../login-dialog';
 import { ColorModeButton } from '../ui/color-mode';
 
 export default function Header(props: { userInfo: ReactNode }) {
+  const locale = useLocale();
   return (
     <header className="sticky top-0 z-10 flex w-full items-center justify-between gap-2 border-b bg-(--chakra-colors-bg) px-2 py-3 md:px-6">
       <div className="text-lg font-bold">
-        <Link href="/">Movie Rating</Link>
+        <Link href={`/${locale}`}>Movie Rating</Link>
       </div>
 
       {/* 右侧：主题切换 + 用户信息/登录按钮（桌面端和移动端都显示） */}
@@ -53,7 +55,7 @@ const MobileMenu = createOverlay((props) => {
     MobileMenu.close(ModalIds.MobileMenu);
   };
   const { t } = useTranslation('header');
-
+  const locale = useLocale();
   return (
     <Drawer.Root {...props}>
       <Portal>
@@ -73,7 +75,7 @@ const MobileMenu = createOverlay((props) => {
                 px={0}
                 onClick={close}
               >
-                <Link href="/" className="flex items-center gap-2">
+                <Link href={`/${locale}`} className="flex items-center gap-2">
                   <MdHome size={18} />
                   {t('header:home')}
                 </Link>

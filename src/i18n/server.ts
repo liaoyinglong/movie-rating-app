@@ -58,5 +58,5 @@ export const getServerI18n = cache(async (ns?: Namespace) => {
     await i18nInstance.loadNamespaces(ns);
   }
 
-  return i18nInstance;
+  return { ...i18nInstance, locale };
 });

@@ -28,7 +28,7 @@ export default async function MoviePage(props: {
   }
 
   const userIsRated = await checkUserIsRated(id);
-  const { t } = await getServerI18n('movie');
+  const { t, locale } = await getServerI18n('movie');
 
   return (
     <div className="min-h-screen transition-colors">
@@ -37,7 +37,7 @@ export default async function MoviePage(props: {
         variant={'ghost'}
         asChild
       >
-        <Link href={'/'}>
+        <Link href={`/${locale}`}>
           <MdArrowBack size={24} />
         </Link>
       </IconButton>
