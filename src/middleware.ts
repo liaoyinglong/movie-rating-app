@@ -58,9 +58,7 @@ export async function middleware(request: NextRequest) {
     }
   }
   const response = NextResponse.next();
-  if (!request.cookies.has(CookieIds.Locale)) {
-    response.cookies.set(CookieIds.Locale, localeFromPathname);
-  }
+  response.cookies.set(CookieIds.Locale, localeFromPathname);
 
   return response;
 }

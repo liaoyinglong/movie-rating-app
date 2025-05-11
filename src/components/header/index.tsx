@@ -111,10 +111,14 @@ function LocaleSwitcher() {
         <Menu.Positioner>
           <Menu.Content data-testid="user-info-menu">
             <Menu.Item asChild value={Locale.enUS}>
-              <Link href={createHref(Locale.enUS)}>English</Link>
+              <Link href={createHref(Locale.enUS)} prefetch={false}>
+                English
+              </Link>
             </Menu.Item>
             <Menu.Item asChild value={Locale.zhCN}>
-              <Link href={createHref(Locale.zhCN)}>简体中文</Link>
+              <Link href={createHref(Locale.zhCN)} prefetch={false}>
+                简体中文
+              </Link>
             </Menu.Item>
           </Menu.Content>
         </Menu.Positioner>
