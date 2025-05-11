@@ -2,6 +2,8 @@
 
 > Live preview: [https://movie-rating-app-bice.vercel.app](https://movie-rating-app-bice.vercel.app)
 
+> [简体中文](./README.zh-CN.md)
+
 ## Feature Overview
 
 - User authentication (login/logout)
@@ -80,7 +82,7 @@ movie-rating/
 - **ESLint** - Code quality checking
 - **lint-staged** - Run linters against staged files
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Requirements
 
