@@ -27,6 +27,7 @@ export default defineConfig({
         'src/app/\\[locale\\]/version/**',
         'src/app/\\[locale\\]/layout.tsx',
         'src/app/\\[locale\\]/\\[...catchall\\]/**',
+        'src/utils/test-utils.tsx',
       ],
     },
   },

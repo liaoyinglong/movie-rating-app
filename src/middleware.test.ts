@@ -8,7 +8,7 @@ describe('middleware', () => {
   const BASE_URL = 'http://localhost:3000';
 
   describe('基础 URL 重写', () => {
-    it('should correctly rewrite', async () => {
+    it('should correctly redirect', async () => {
       await Promise.all(
         [
           // 未携带 locale
@@ -98,10 +98,18 @@ describe('middleware', () => {
       );
 
       const response = await middleware(request);
-      expect(response).toBeDefined();
       expect(getRedirectUrl(response!)).toBe(
         `${BASE_URL}/en-US/movie/1?ref=123&source=email`,
       );
+    });
+  });
+
+  describe('不需要重定向的情况', () => {
+    it('should not redirect when path is in the allowed list', async () => {
+      const request = new NextRequest(`${BASE_URL}/en-US/movie/1`);
+      const response = await middleware(request);
+      expect(response).toBeDefined();
+      expect(getRedirectUrl(response!)).toBeNull();
     });
   });
 });
