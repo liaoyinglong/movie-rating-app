@@ -2,29 +2,34 @@
 
 import { CookieIds } from '@/constants/cookie-ids';
 import { database } from '@/database/data';
+import { getServerI18n } from '@/i18n/server';
 import { errorResponse, successResponse } from '@/utils/response';
 import { cookies } from 'next/headers';
 import 'server-only';
 import { z } from 'zod';
 
+const t = (v: string) => v;
+
 const loginSchema = z.object({
   username: z.string().min(1, {
-    error: '用户名不能为空',
+    message: t('actions:login.username-empty'),
   }),
   password: z
     .string()
     .min(1, {
-      error: '密码不能为空',
+      error: t('actions:login.password-empty'),
     })
     .max(10, {
-      error: '密码不能超过10个字符',
+      error: t('actions:login.password-too-long'),
     }),
 });
 
 export async function login(loginInfo: z.infer<typeof loginSchema>) {
+  const { t } = await getServerI18n('actions');
+
   const result = loginSchema.safeParse(loginInfo);
   if (!result.success) {
-    return errorResponse(result.error);
+    return errorResponse(t(result.error.issues[0].message));
   }
   const { username, password } = result.data;
   let user = await database.users.get(username);
@@ -36,7 +41,7 @@ export async function login(loginInfo: z.infer<typeof loginSchema>) {
     };
     await database.users.set(username, user);
   } else if (user.password !== password) {
-    return errorResponse('用户名或密码错误');
+    return errorResponse(t('actions:login.username-or-password-error'));
   }
 
   const cookieStore = await cookies();

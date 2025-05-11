@@ -25,11 +25,17 @@ function getI18n(lng: string) {
     }),
   );
 
-  instance.init({
-    ...i18nSharedOptions,
-    returnNull: false,
-    lng,
-  });
+  instance.init(
+    Object.assign(
+      {},
+      i18nSharedOptions,
+      {
+        returnNull: false,
+        lng,
+      },
+      process.env.VITEST ? { fallbackLng: lng } : {},
+    ),
+  );
 
   i18nCacheMap.set(lng, instance);
 

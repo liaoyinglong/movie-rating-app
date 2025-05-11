@@ -1,0 +1,20 @@
+{
+  "login": {
+    "username-empty": "Username cannot be empty",
+    "password-empty": "Password cannot be empty",
+    "password-too-long": "Password cannot exceed 10 characters",
+    "username-or-password-error": "Incorrect username or password"
+  },
+  "rate-movie": {
+    "please-login-again": "Please log in and try again",
+    "movie-not-found": "Movie not found",
+    "already-rated": "You have already rated this movie",
+    "success": "Rating successful",
+    "movie-id-empty": "Movie ID cannot be empty",
+    "score-empty": "Score cannot be empty",
+    "score-min": "Score cannot be less than 1",
+    "score-max": "Score cannot be greater than 5",
+    "comment-empty": "Comment cannot be empty",
+    "comment-min": "Comment must be at least 1 character"
+  }
+}

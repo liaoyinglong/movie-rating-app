@@ -1,53 +1,60 @@
 'use server';
 import { database } from '@/database/data';
+import { getServerI18n } from '@/i18n/server';
 import { errorResponse, ResponseCode, successResponse } from '@/utils/response';
 import { revalidatePath } from 'next/cache';
 import 'server-only';
 import z from 'zod';
 import { getUserInfo } from './get-user-info';
 
+const t = (v: string) => v;
 const rateMovieSchema = z.object({
   movieId: z.string({
-    error: '电影ID不能为空',
+    error: t('actions:rate-movie.movie-id-empty'),
   }),
   score: z
     .number({
-      error: '评分不能为空',
+      error: t('actions:rate-movie.score-empty'),
     })
     .min(1, {
-      error: '评分不能小于1',
+      error: t('actions:rate-movie.score-min'),
     })
     .max(5, {
-      error: '评分不能大于5',
+      error: t('actions:rate-movie.score-max'),
     }),
   comment: z
     .string({
-      error: '评论不能为空',
+      error: t('actions:rate-movie.comment-empty'),
     })
     .min(1, {
-      error: '评论不能少于1个字符',
+      error: t('actions:rate-movie.comment-min'),
     })
     .max(100, {
-      error: '评论不能超过100个字符',
+      error: t('actions:rate-movie.comment-max'),
     }),
 });
 
 export async function rateMovie(params: z.infer<typeof rateMovieSchema>) {
   const user = await getUserInfo();
+  const { t } = await getServerI18n('actions');
+
   if (!user) {
-    return errorResponse('请登录后再试', ResponseCode.Unauthorized);
+    return errorResponse(
+      t('actions:rate-movie.please-login-again'),
+      ResponseCode.Unauthorized,
+    );
   }
 
   const result = rateMovieSchema.safeParse(params);
   if (!result.success) {
-    return errorResponse(result.error);
+    return errorResponse(t(result.error.issues[0].message));
   }
 
   const { movieId, score, comment } = result.data;
 
   const movie = await database.movies.get(movieId);
   if (!movie) {
-    return errorResponse('电影不存在');
+    return errorResponse(t('actions:rate-movie.movie-not-found'));
   }
 
   const ratingId = `${user.id}-${movie.id}`;
@@ -56,7 +63,7 @@ export async function rateMovie(params: z.infer<typeof rateMovieSchema>) {
 
   if (existRating) {
     revalidatePath(`/movie/${movieId}`);
-    return errorResponse('您已经评价过这部电影');
+    return errorResponse(t('actions:rate-movie.already-rated'));
   }
 
   // update db
@@ -75,5 +82,5 @@ export async function rateMovie(params: z.infer<typeof rateMovieSchema>) {
   movie.averageRating = Math.floor(movie.totalRating / movie.ratingCount);
   await database.movies.set(movieId, movie);
   revalidatePath(`/movie/${movieId}`);
-  return successResponse('评价成功');
+  return successResponse(t('actions:rate-movie.success'));
 }
